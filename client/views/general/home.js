@@ -39,10 +39,22 @@ angular.module('poseidon')
           var lat = result[0].geometry.location.A;
           var lng = result[0].geometry.location.F;
           Map.create('#mapDiv', lat, lng, 12);
+          // getTweets(lat, lng);
+          $window.jQuery.getJSON("https://en.wikipedia.org/w/api.php?format=json&action=query&list=search&prop=revisions&srsearch="+location+"&rvprop=content&rvsection=0&callback=?", function(info){
+            console.log('wikipedia', info);
+          });
         });
       })
     })
   };
-
-
+  // function getTweets(lat, lng){
+  //   var lat1 = lat + 1;
+  //   var lng1 = lng + 1;
+  //   var lat2 = lat - 1;
+  //   var lng2 = lng - 1;
+  //   console.log(lat1, lng1, lat2, lng2)
+  //   $window.jQuery.get("https://api.twitter.com/1.1/geo/search.json?query=Toronto", function(response){
+  //     console.log(response, 'woot');
+  //   })
+  // }
 });
