@@ -4,3 +4,13 @@
     input.form-control(type='text', ng-model='location', placeholder='city, state, region, etc') 
     button.btn.btn-info.btn-lg.center-block(ng-click='findLocation(location)') Discover
     
+    img(ng-src='https://farm{{photos[0].farm}}.staticflickr.com/{{photos[0].server}}/{{photos[0].id}}_{{photos[0].secret}}.jpg')
+      
+      
+    img(ng-src='{{weather.icon_url}}')
+    h2 {{weather.conditions}}
+    h2 Low: {{weather.low.fahrenheit}} &#186;
+    h2 High: {{weather.high.fahrenheit}} &#186;
+    h2 Humidity: {{weather.avehumidity}}%
+    
+    #mapDiv
