@@ -3,20 +3,23 @@
     h1 Discover
     input.form-control(type='text', ng-model='location', placeholder='city, state, region, etc') 
     button.btn.btn-info.btn-lg.center-block(ng-click='findLocation(location)') Discover
-    
-    h3(ng-show='isClicked') Gallery:
-    
-    img#gallery(ng-src='https://farm{{photos[0].farm}}.staticflickr.com/{{photos[0].server}}/{{photos[0].id}}_{{photos[0].secret}}.jpg')
-      
-    h3(ng-show='isClicked') Information:
-    
-    #mapDiv
+.row
+  .col-xs-2
     img(ng-src='{{weather.icon_url}}')
     h2 {{weather.conditions}}
     h2(ng-show='isClicked') Low: {{weather.low.fahrenheit}} &#186;
     h2(ng-show='isClicked') High: {{weather.high.fahrenheit}} &#186;
     h2(ng-show='isClicked') Humidity: {{weather.avehumidity}}%
+  .col-xs-4
+    h3(ng-show='isClicked') Gallery:
     
+    img#gallery(ng-src='https://farm{{photos[0].farm}}.staticflickr.com/{{photos[0].server}}/{{photos[0].id}}_{{photos[0].secret}}.jpg')
+      
+  .col-xs-4
+    #mapDiv
+    
+    
+    h3(ng-show='isClicked') Information:
     h2(ng-show='isClicked'): a(ng-href='http://en.wikipedia.org/?curid={{pageId}}') Wikipedia Article
     
     
