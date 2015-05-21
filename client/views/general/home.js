@@ -27,35 +27,32 @@ angular.module('poseidon')
 .controller('HomeCtrl', function($rootScope, $scope, $state, $firebaseObject, $http, User, $window, Map){
 
   $scope.photos = [];
-  $scope.$watch('photos', updatePhotos);
+  // $scope.$watch('photos', updatePhotos);
 
   $scope.isClicked = false;
-
-  function updatePhotos(){
-    $scope.photos = $scope.photos;
-  }
 
   $scope.findLocation = function(location){
     $scope.isClicked = true;
     Map.geocode(location, function(result){
       var lat = result[0].geometry.location.A;
       var lng = result[0].geometry.location.F;
-      Map.create('#mapDiv', lat, lng, 12);
-      // getTweets(lat, lng);
+      location = result[0].formatted_address;
+      Map.create('#mapDiv', lat, lng, 10);
       $window.jQuery.get("http://api.flickr.com/services/rest/?method=flickr.photos.search&tags=" + location.toUpperCase() + "&api_key=ea15c092788c7cfb6911fa14efe1d88f&per_page=10&format=json&nojsoncallback=1",
       function(data){
-        console.log('photos array', data.photos.photo);
-
-        data.photos.photo.forEach(function(e){
-          $scope.photos.push(e);
+        $scope.$apply(function(){
+          $scope.photos = data.photos.photo;
         });
         $window.jQuery.get("http://api.wunderground.com/api/bdce31546b59e7b1/geolookup/forecast/q/" + location.toUpperCase() + ".json", function(response){
-          console.log(response.forecast.simpleforecast.forecastday[0], 'WEATHER');
-          $scope.weather = response.forecast.simpleforecast.forecastday[0];
+          $scope.$apply(function(){
+            console.log(response, '!!!!!!')
+            $scope.weather = response.forecast.simpleforecast.forecastday[0];
+          });
           $window.jQuery.getJSON("https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&prop=revisions&gsrsearch="+location+"&rvprop=content&rvsection=0&callback=?", function(info){
             var firstPageResult = Object.keys(info.query.pages)[0];
-            $scope.pageId = info.query.pages[firstPageResult].pageid;
-            console.log($scope.pageId);
+            $scope.$apply(function(){
+              $scope.pageId = info.query.pages[firstPageResult].pageid;
+            });
             // var contentKey = Object.keys(info.query.pages[firstPageResult].revisions[0])[2];
             // console.log(contentKey);
             // var pageContent = $window.markdown.toHTML(info.query.pages[firstPageResult].revisions[0][contentKey]);
@@ -66,7 +63,7 @@ angular.module('poseidon')
         })
       })
     });
-  };
+  }
   // function getTweets(lat, lng){
   //   var lat1 = lat + 1;
   //   var lng1 = lng + 1;

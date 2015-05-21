@@ -6,7 +6,7 @@
     
     h3(ng-show='isClicked') Gallery:
     
-    img(ng-src='https://farm{{photos[0].farm}}.staticflickr.com/{{photos[0].server}}/{{photos[0].id}}_{{photos[0].secret}}.jpg')
+    img#gallery(ng-src='https://farm{{photos[0].farm}}.staticflickr.com/{{photos[0].server}}/{{photos[0].id}}_{{photos[0].secret}}.jpg')
       
     h3(ng-show='isClicked') Information:
     
