@@ -15,9 +15,9 @@
   .col-xs-2.col-xs-offset-2.weather
     img(ng-src='{{weather.icon_url}}')
     h2 {{weather.conditions}}
-    h2(ng-show='isClicked') Low: {{weather.low.fahrenheit}} &#186;
-    h2(ng-show='isClicked') High: {{weather.high.fahrenheit}} &#186;
-    h2(ng-show='isClicked') Humidity: {{weather.avehumidity}}%
+    h2(ng-show='isClicked') Current: {{weather.temp}} &#186; C
+    h2(ng-show='isClicked') Humidity: {{weather.humidity}}%
+    h2(ng-show='isClicked') Description: {{weather.desc}}
       
   .col-xs-2.col-xs-offset-1
     #mapDiv

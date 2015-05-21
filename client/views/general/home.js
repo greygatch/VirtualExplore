@@ -43,10 +43,13 @@ angular.module('poseidon')
         $scope.$apply(function(){
           $scope.photos = data.photos.photo;
         });
-        $window.jQuery.get('http://query.yahooapis.com/v1/public/yql?q=select%20item%20from%20weather.forecast%20where%20location=%22'+location.trim()+'%22&format=json&u=c', function(response){
+        $window.jQuery.get('http://api.openweathermap.org/data/2.5/weather?q=' + location, function(response){
           console.log(response, '!!!!!!!!!!!!');
           $scope.$apply(function(){
-            $scope.weather = response.forecast.simpleforecast.forecastday[0];
+            $scope.weather = {};
+            $scope.weather.temp = (response.main.temp - 273.16).toFixed(1);
+            $scope.weather.humidity = response.main.humidity;
+            $scope.weather.desc = response.weather[0].description;
           });
           $window.jQuery.getJSON('https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&prop=revisions&gsrsearch='+location+'&rvprop=content&rvsection=0&callback=?', function(info){
             var firstPageResult = Object.keys(info.query.pages)[0];
