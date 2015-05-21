@@ -1,8 +1,7 @@
 {
-  "name": "poseidon",
+  "name": "Virtual Explore",
   "version": "0.0.1",
-  "homepage": "https://github.com/coding-house-apr2015/poseidon",
-  "author": "Chyld Medford <chyld.medford@gmail.com>",
+  "author": ["Evan Gatchell", "Andrew Dinh", "Clyde Marl", "DickSW Armstrong-Stoner"],
   "license": "BSD",
   "devDependencies": {
     "bower": "^1.4.1",

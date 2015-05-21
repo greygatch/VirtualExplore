@@ -1,29 +1,39 @@
 .row
   .col-xs-4.col-xs-offset-4
-    h1 Discover
+    h1 Virtual Explorer
     input.form-control(type='text', ng-model='location', placeholder='city, state, region, etc') 
     button.btn.btn-info.btn-lg.center-block(ng-click='findLocation(location)') Discover
+    #spacing
+      p &nbsp;
     
-.row
-  .col-xs-4.col-xs-offset-4
-      h3(ng-show='isClicked') Gallery:
-      
-      img#gallery(ng-src='https://farm{{photos[0].farm}}.staticflickr.com/{{photos[0].server}}/{{photos[0].id}}_{{photos[0].secret}}.jpg')
         
-.row
-  h3(ng-show='isClicked') Information:
-  .col-xs-2.col-xs-offset-2.weather
-    img(ng-src='{{weather.icon_url}}')
+.row.info(ng-show='isClicked')
+  .col-xs-3.col-xs-offset-2.weather
+    h1.infotitle.center Weather Information:
+    br
     h2 {{weather.conditions}}
-    h2(ng-show='isClicked') Current: {{weather.temp}} &#186; C
+    h2(ng-show='isClicked') Current Temperature: {{weather.temp}} &#186; C
     h2(ng-show='isClicked') Humidity: {{weather.humidity}}%
-    h2(ng-show='isClicked') Description: {{weather.desc}}
+    img(ng-src='http://openweathermap.org/img/w/{{weather.icon}}.png')
+    h2(ng-show='isClicked') Forecast: {{weather.desc | uppercase}}
       
-  .col-xs-2.col-xs-offset-1
+  .col-xs-2.col-xs-offset-2
+    p &nbsp;
+    br
     #mapDiv
-.row
-  .col-xs-4.col-xs-offset-4    
-    h2(ng-show='isClicked'): a(ng-href='http://en.wikipedia.org/?curid={{pageId}}') Wikipedia {{location}}
+  .row
+    .col-xs-4.col-xs-offset-4    
+      h2(ng-show='isClicked'): a(ng-href='http://en.wikipedia.org/?curid={{pageId}}') Wikipedia ~&nbsp;{{location}}
     
+.row.culture
+  .col-xs-4.col-xs-offset-4
+    .col-xs-1
+      i.fa.fa-chevron-left.fa-5x.gallery(ng-show='isClicked', ng-click='move("prev")')
+    .col-xs-10
+      img.gallery(ng-src='https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}.jpg')
+      p &nbsp;
+      h3(ng-show='isClicked') Gallery
+    .col-xs-1
+      i.fa.fa-chevron-right.fa-5x.gallery(ng-show='isClicked', ng-click='move("next")')
     
     
