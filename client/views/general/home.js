@@ -39,14 +39,12 @@ angular.module('poseidon')
     Map.geocode(location, function(result){
       var lat = result[0].geometry.location.A;
       var lng = result[0].geometry.location.F;
-      console.log(result[0]);
       location = result[0].formatted_address;
       $scope.location = result[0].formatted_address;
       Map.create('#mapDiv', lat, lng, 10);
       $window.jQuery.get('http://api.flickr.com/services/rest/?method=flickr.photos.search&tags=' + location.toUpperCase() + '&api_key=ea15c092788c7cfb6911fa14efe1d88f&per_page=10&format=json&nojsoncallback=1',
       function(data){
         $scope.$apply(function(){
-          console.log(data.photos.photo, 'photos');
           $scope.i = 0;
           $scope.photos = [];
           $scope.photo = null;
@@ -54,7 +52,6 @@ angular.module('poseidon')
           $scope.photo = $scope.photos[$scope.i];
         });
         $window.jQuery.get('http://api.openweathermap.org/data/2.5/weather?q=' + location, function(response){
-          console.log(response, '!!!!!!!!!!!!');
           $scope.$apply(function(){
             $scope.weather = {};
             $scope.weather.temp = (response.main.temp - 273.16).toFixed(1);
@@ -65,7 +62,6 @@ angular.module('poseidon')
           $window.jQuery.getJSON('https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&prop=revisions&gsrsearch='+location+'&rvprop=content&rvsection=0&callback=?', function(info){
             var firstPageResult = Object.keys(info.query.pages)[0];
             $scope.$apply(function(){
-              console.log('woot');
               $scope.pageId = info.query.pages[firstPageResult].pageid;
             });
           });
