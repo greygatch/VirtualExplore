@@ -41,6 +41,7 @@ angular.module('poseidon')
       function(data){
         $scope.$apply(function(){
           $scope.photos = data.photos.photo;
+          console.log($scope.photos, 'EEEEEE');
         });
         $window.jQuery.get("http://api.wunderground.com/api/bdce31546b59e7b1/geolookup/forecast/q/" + location.toUpperCase() + ".json", function(response){
           $scope.$apply(function(){
