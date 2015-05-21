@@ -34,6 +34,7 @@ angular.module('poseidon')
     Map.geocode(location, function(result){
       var lat = result[0].geometry.location.A;
       var lng = result[0].geometry.location.F;
+      console.log(result[0]);
       location = result[0].formatted_address;
       Map.create('#mapDiv', lat, lng, 10);
       $window.jQuery.get("http://api.flickr.com/services/rest/?method=flickr.photos.search&tags=" + location.toUpperCase() + "&api_key=ea15c092788c7cfb6911fa14efe1d88f&per_page=10&format=json&nojsoncallback=1",
@@ -50,9 +51,9 @@ angular.module('poseidon')
             $scope.$apply(function(){
               $scope.pageId = info.query.pages[firstPageResult].pageid;
             });
-            $window.jQuery.getJSON("http://twitter.com/search?q=place%3A247f43d441defc03", function(twitterResponse){
-              console.log(twitterResponse, 'woot');
-            });
+            // $window.jQuery.getJSON("http://twitter.com/search?q=place%3A247f43d441defc03", function(twitterResponse){
+            //   console.log(twitterResponse, 'woot');
+            // });
             // var contentKey = Object.keys(info.query.pages[firstPageResult].revisions[0])[2];
             // console.log(contentKey);
             // var pageContent = $window.markdown.toHTML(info.query.pages[firstPageResult].revisions[0][contentKey]);
