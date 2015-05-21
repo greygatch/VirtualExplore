@@ -4,13 +4,19 @@
     input.form-control(type='text', ng-model='location', placeholder='city, state, region, etc') 
     button.btn.btn-info.btn-lg.center-block(ng-click='findLocation(location)') Discover
     
+    h3(ng-show='isClicked') Gallery:
+    
     img(ng-src='https://farm{{photos[0].farm}}.staticflickr.com/{{photos[0].server}}/{{photos[0].id}}_{{photos[0].secret}}.jpg')
       
-      
-    img(ng-src='{{weather.icon_url}}')
-    h2 {{weather.conditions}}
-    h2 Low: {{weather.low.fahrenheit}} &#186;
-    h2 High: {{weather.high.fahrenheit}} &#186;
-    h2 Humidity: {{weather.avehumidity}}%
+    h3(ng-show='isClicked') Information:
     
     #mapDiv
+    img(ng-src='{{weather.icon_url}}')
+    h2 {{weather.conditions}}
+    h2(ng-show='isClicked') Low: {{weather.low.fahrenheit}} &#186;
+    h2(ng-show='isClicked') High: {{weather.high.fahrenheit}} &#186;
+    h2(ng-show='isClicked') Humidity: {{weather.avehumidity}}%
+    
+    h2(ng-show='isClicked'): a(ng-href='http://en.wikipedia.org/?curid={{pageId}}') Wikipedia Article
+    
+    
