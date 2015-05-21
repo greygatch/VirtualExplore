@@ -27,8 +27,6 @@ angular.module('poseidon')
 .controller('HomeCtrl', function($rootScope, $scope, $state, $firebaseObject, $http, User, $window, Map){
 
   $scope.photos = [];
-  // $scope.$watch('photos', updatePhotos);
-
   $scope.isClicked = false;
 
   $scope.findLocation = function(location){
@@ -45,13 +43,15 @@ angular.module('poseidon')
         });
         $window.jQuery.get("http://api.wunderground.com/api/bdce31546b59e7b1/geolookup/forecast/q/" + location.toUpperCase() + ".json", function(response){
           $scope.$apply(function(){
-            console.log(response, '!!!!!!')
             $scope.weather = response.forecast.simpleforecast.forecastday[0];
           });
           $window.jQuery.getJSON("https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&prop=revisions&gsrsearch="+location+"&rvprop=content&rvsection=0&callback=?", function(info){
             var firstPageResult = Object.keys(info.query.pages)[0];
             $scope.$apply(function(){
               $scope.pageId = info.query.pages[firstPageResult].pageid;
+            });
+            $window.jQuery.getJSON("http://twitter.com/search?q=place%3A247f43d441defc03", function(twitterResponse){
+              console.log(twitterResponse, 'woot');
             });
             // var contentKey = Object.keys(info.query.pages[firstPageResult].revisions[0])[2];
             // console.log(contentKey);
@@ -64,18 +64,4 @@ angular.module('poseidon')
       })
     });
   }
-  // function getTweets(lat, lng){
-  //   var lat1 = lat + 1;
-  //   var lng1 = lng + 1;
-  //   var lat2 = lat - 1;
-  //   var lng2 = lng - 1;
-  //   console.log(lat1, lng1, lat2, lng2)
-  //   $window.jQuery.get("https://api.twitter.com/1.1/geo/search.json?query=Toronto", function(response){
-  //     console.log(response, 'woot');
-  //   })
-  // }
 });
-
-
-
-// http://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrsearch=test&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max
